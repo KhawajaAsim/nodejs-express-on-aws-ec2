@@ -1,18 +1,23 @@
-version: 0.0
-os: linux
-files:
-  - source: /
-    destination: /home/ec2-user/express-app
-hooks:
-  ApplicationStop:
-    - location: scripts/application_stop.sh
-      timeout: 300
-      runas: ec2-user
-  BeforeInstall:
-    - location: scripts/application_install.sh
-      timeout: 300
-      runas: ec2-user
-  ApplicationStart:
-    - location: scripts/application_start.sh
-      timeout: 300
-      runas: ec2-user
+name: 'Deploy Pull Request'
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  deploy-pr:
+    name: 'Deploy Pull Request'
+    runs-on: ubuntu-latest
+    if: ${{ github.event.label.name == 'deploy' }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Docker Login
+      run: docker login ...
+
+    - name: Build Docker image
+      run: docker build --tag 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning:pr-${{ github.event.pull_request.number }} ...
+
+    - name: Push Docker image
+      run: docker push  --all 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning
