@@ -23,4 +23,4 @@ jobs:
       run: docker build --tag 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning:pr-1540 .
 
     - name: Push Docker image
-      run: docker push  --all 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning
+      run: docker push  --a 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning
