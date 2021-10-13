@@ -29,7 +29,17 @@ jobs:
       with:
          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         aws-region: us-east-1  
+         aws-region: us-east-1
+    - name: Install Helm Chart
+      working-directory: env/helm
+      run: |
+        helm upgrade pr-${{ github.event.pull_request.number }} mychart \
+          --install \
+          --namespace pr-${{ github.event.pull_request.number }} \
+          --create-namespace \
+          --wait \
+          --set image.tag=pr-${{ github.event.pull_request.number }} \
+          --set ingress.domain.prefix=1540.pr     
     - name: Authenticate with ECR
       run: |
         export HELM_EXPERIMENTAL_OCI=1
