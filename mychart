@@ -1,0 +1,9 @@
+image:
+  repository: "673109745344.dkr.ecr.us-east-1.amazonaws.com/learning"
+  tag: "latest"
+
+ingress:
+  domain:
+    base: "example.com"
+    prefix: ""
+    suffix: ""
