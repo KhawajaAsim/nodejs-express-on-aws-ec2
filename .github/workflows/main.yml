@@ -37,4 +37,4 @@ jobs:
          --region us-east-1 | helm registry login \
          --username AWS \
          --password-stdin 673109745344.dkr.ecr.us-east-1.amazonaws.com
-        helm chart push 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning:mychart  
+        helm push 673109745344.dkr.ecr.us-east-1.amazonaws.com/learning:mychart  
